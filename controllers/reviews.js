@@ -13,7 +13,7 @@ export const getAllReviews = (req, res) => {
     } else {
         sortQuery = '';
     }
-    pool.query(`SELECT * FROM express.review ${sortQuery}`, (error, results, fields) => {
+    pool.query(`SELECT * FROM sql7623226.review ${sortQuery}`, (error, results, fields) => {
         if (error) {
             console.error('Error getting reviews:', error);
             return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
@@ -31,7 +31,7 @@ export const getAllReviews = (req, res) => {
 // Get a specific review
 export const getReview = (req, res) => {
     const id = req.params.id;
-    pool.query('SELECT * FROM express.review WHERE id = ?', [id], (error, results) => {
+    pool.query('SELECT * FROM sql7623226.review WHERE id = ?', [id], (error, results) => {
         if (error) {
             console.error('Error getting review:', error);
             return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
@@ -56,7 +56,7 @@ export const createReview = (req, res) => {
     const { name, message, rating } = req.body;
     const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const values = [name, message, rating, timestamp];
-    pool.query('INSERT INTO express.review (name, message, rating, timestamp) VALUES (?, ?, ?, ?)', values, (error, result) => {
+    pool.query('INSERT INTO sql7623226.review (name, message, rating, timestamp) VALUES (?, ?, ?, ?)', values, (error, result) => {
         if (error) {
             console.error('Error creating review:', error);
             return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
@@ -71,7 +71,7 @@ export const updateReview = (req, res) => {
     const { name, message, rating } = req.body;
     const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const values = [name, message, rating, timestamp, id];
-    pool.query('UPDATE express.review SET name = ?, message = ?, rating = ?, timestamp = ? WHERE id = ?', values, (error, result) => {
+    pool.query('UPDATE sql7623226.review SET name = ?, message = ?, rating = ?, timestamp = ? WHERE id = ?', values, (error, result) => {
         if (error) {
             console.error('Error updating review:', error);
             return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
@@ -86,7 +86,7 @@ export const updateReview = (req, res) => {
 // Delete a review
 export const deleteReview = (req, res) => {
     const id = req.params.id;
-    pool.query('DELETE FROM express.review WHERE id = ?', [id], (error, result) => {
+    pool.query('DELETE FROM sql7623226.review WHERE id = ?', [id], (error, result) => {
         if (error) {
             console.error('Error deleting review:', error);
             return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
@@ -110,7 +110,7 @@ export const getAllReviewsRecipe = (req, res) => {
     } else {
         sortQuery = '';
     }
-    pool.query(`SELECT * FROM express.review_recipe ${sortQuery}`, (error, results, fields) => {
+    pool.query(`SELECT * FROM sql7623226.review_recipe ${sortQuery}`, (error, results, fields) => {
         if (error) {
             console.error('Error getting recipe:', error);
             return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
@@ -133,7 +133,7 @@ export const createReviewRecipe = (req, res) => {
     const { name, message, rating , recipename, url} = req.body;
     const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     const values = [name, message, rating, recipename, url, timestamp];
-    pool.query('INSERT INTO express.review_recipe (name, message, rating, recipename, url, timestamp) VALUES (?, ?, ? , ? , ?, ?)', values, (error, result) => {
+    pool.query('INSERT INTO sql7623226.review_recipe (name, message, rating, recipename, url, timestamp) VALUES (?, ?, ? , ? , ?, ?)', values, (error, result) => {
         if (error) {
             console.error('Error creating review:', error);
             return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
